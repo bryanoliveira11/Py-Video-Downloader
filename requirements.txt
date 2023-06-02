@@ -1,2 +1,3 @@
 pytube
 pyside6
+requests
