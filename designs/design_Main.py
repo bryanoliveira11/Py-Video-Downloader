@@ -11,10 +11,11 @@ from PySide6 import QtCore, QtGui, QtWidgets
 
 class Ui_PytubeDownloader(object):
     def setupUi(self, PytubeDownloader):
-        PytubeDownloader.setObjectName("PytubeDownloader")
+        PytubeDownloader.setObjectName("PyVideoDownloader | Search")
         PytubeDownloader.resize(871, 600)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-youtube-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-youtube-48.png"),
+                       QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         PytubeDownloader.setWindowIcon(icon)
         PytubeDownloader.setStyleSheet("background-color: #fff;")
         PytubeDownloader.setTabShape(QtWidgets.QTabWidget.TabShape.Rounded)
@@ -38,24 +39,27 @@ class Ui_PytubeDownloader(object):
         self.gridLayout_2.setObjectName("gridLayout_2")
         self.url_info = QtWidgets.QLabel(parent=self.verticalLayoutWidget_2)
         self.url_info.setStyleSheet("margin-bottom: 7px;\n"
-"font: 75 14pt \"MS Shell Dlg 2\";\n"
-"color: #000000;\n"
-"")
-        self.url_info.setAlignment(QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignTop)
+                                    "font: 75 14pt \"MS Shell Dlg 2\";\n"
+                                    "color: #000000;\n"
+                                    "")
+        self.url_info.setAlignment(
+            QtCore.Qt.AlignmentFlag.AlignHCenter | QtCore.Qt.AlignmentFlag.AlignTop)
         self.url_info.setObjectName("url_info")
-        self.gridLayout_2.addWidget(self.url_info, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignBottom)
+        self.gridLayout_2.addWidget(
+            self.url_info, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter | QtCore.Qt.AlignmentFlag.AlignBottom)
         self.Url_Input = QtWidgets.QLineEdit(parent=self.verticalLayoutWidget_2)
-        self.Url_Input.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.IBeamCursor))
+        self.Url_Input.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.IBeamCursor))
         self.Url_Input.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.Url_Input.setAutoFillBackground(False)
         self.Url_Input.setStyleSheet("background:#657683;\n"
-"margin-left: 15px;\n"
-"margin-right: 15px;\n"
-"margin-bottom:12px;\n"
-"border-radius: 4px;\n"
-"color: #eee;\n"
-"font: 12pt \"Segoe UI Historic\";\n"
-"padding: 1px")
+                                     "margin-left: 15px;\n"
+                                     "margin-right: 15px;\n"
+                                     "margin-bottom:12px;\n"
+                                     "border-radius: 4px;\n"
+                                     "color: #eee;\n"
+                                     "font: 12pt \"Segoe UI Historic\";\n"
+                                     "padding: 1px")
         self.Url_Input.setText("")
         self.Url_Input.setFrame(True)
         self.Url_Input.setEchoMode(QtWidgets.QLineEdit.EchoMode.Normal)
@@ -72,20 +76,21 @@ class Ui_PytubeDownloader(object):
         self.python_ico = QtWidgets.QLabel(parent=self.verticalLayoutWidget)
         self.python_ico.setStyleSheet("margin-left:16px;")
         self.python_ico.setText("")
-        self.python_ico.setPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-python-70.png"))
+        self.python_ico.setPixmap(QtGui.QPixmap(
+            "NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-python-70.png"))
         self.python_ico.setObjectName("python_ico")
         self.gridLayout_3.addWidget(self.python_ico, 0, 1, 1, 2)
         self.app_title = QtWidgets.QLabel(parent=self.verticalLayoutWidget)
         self.app_title.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.app_title.setStyleSheet("font: 63 20pt \"Sitka Heading Semibold\";\n"
-"color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.522727 rgba(84, 155, 255, 255), stop:0.710227 rgba(77, 131, 230, 255));\n"
-"border-radius:11px;\n"
-"margin-left:15px;\n"
-"margin-top:5px;\n"
-"margin-bottom:5px;\n"
-"padding-right:12px;\n"
-"padding-left:12px;\n"
-"")
+                                     "color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.522727 rgba(84, 155, 255, 255), stop:0.710227 rgba(77, 131, 230, 255));\n"
+                                     "border-radius:11px;\n"
+                                     "margin-left:15px;\n"
+                                     "margin-top:5px;\n"
+                                     "margin-bottom:5px;\n"
+                                     "padding-right:12px;\n"
+                                     "padding-left:12px;\n"
+                                     "")
         self.app_title.setFrameShape(QtWidgets.QFrame.Shape.WinPanel)
         self.app_title.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.app_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -96,67 +101,88 @@ class Ui_PytubeDownloader(object):
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Button, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.Button, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Text, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Base, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Window, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.BrushStyle.NoBrush)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.PlaceholderText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Button, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.Button, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Text, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Base, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Window, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.BrushStyle.NoBrush)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.PlaceholderText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Button, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.Button, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Text, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Base, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Window, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255, 128))
         brush.setStyle(QtCore.Qt.BrushStyle.NoBrush)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.PlaceholderText, brush)
         self.line.setPalette(palette)
         self.line.setStyleSheet("")
         self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
@@ -165,11 +191,13 @@ class Ui_PytubeDownloader(object):
         self.btnDownloadOptions = QtWidgets.QPushButton(parent=self.frame)
         self.btnDownloadOptions.setEnabled(True)
         self.btnDownloadOptions.setGeometry(QtCore.QRect(370, 460, 71, 71))
-        self.btnDownloadOptions.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnDownloadOptions.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnDownloadOptions.setStyleSheet("")
         self.btnDownloadOptions.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-forward-button-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-forward-button-64.png"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnDownloadOptions.setIcon(icon1)
         self.btnDownloadOptions.setIconSize(QtCore.QSize(50, 50))
         self.btnDownloadOptions.setFlat(False)
@@ -185,33 +213,40 @@ class Ui_PytubeDownloader(object):
         self.video_thumb.setText("")
         self.video_thumb.setScaledContents(False)
         self.video_thumb.setObjectName("video_thumb")
-        self.gridLayout_5.addWidget(self.video_thumb, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.gridLayout_5.addWidget(
+            self.video_thumb, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.gridLayoutWidget_3 = QtWidgets.QWidget(parent=self.frame)
         self.gridLayoutWidget_3.setGeometry(QtCore.QRect(697, 130, 61, 41))
         self.gridLayoutWidget_3.setObjectName("gridLayoutWidget_3")
         self.gridLayout_7 = QtWidgets.QGridLayout(self.gridLayoutWidget_3)
         self.gridLayout_7.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_7.setObjectName("gridLayout_7")
-        self.btnSearchVideo = QtWidgets.QPushButton(parent=self.gridLayoutWidget_3)
-        self.btnSearchVideo.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnSearchVideo = QtWidgets.QPushButton(
+            parent=self.gridLayoutWidget_3)
+        self.btnSearchVideo.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnSearchVideo.setStyleSheet("")
         self.btnSearchVideo.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-magnifying-glass.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-magnifying-glass.png"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnSearchVideo.setIcon(icon2)
         self.btnSearchVideo.setIconSize(QtCore.QSize(64, 26))
         self.btnSearchVideo.setObjectName("btnSearchVideo")
-        self.gridLayout_7.addWidget(self.btnSearchVideo, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignLeft)
+        self.gridLayout_7.addWidget(
+            self.btnSearchVideo, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignLeft)
         self.gridLayoutWidget_2 = QtWidgets.QWidget(parent=self.frame)
         self.gridLayoutWidget_2.setGeometry(QtCore.QRect(300, 230, 471, 151))
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
         self.gridLayout_6 = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_6.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_6.setObjectName("gridLayout_6")
-        self.video_title = QtWidgets.QTextBrowser(parent=self.gridLayoutWidget_2)
+        self.video_title = QtWidgets.QTextBrowser(
+            parent=self.gridLayoutWidget_2)
         self.video_title.setEnabled(True)
         self.video_title.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
-        self.video_title.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.video_title.setHorizontalScrollBarPolicy(
+            QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.video_title.setObjectName("video_title")
         self.gridLayout_6.addWidget(self.video_title, 0, 0, 1, 1)
         self.gridLayoutWidget_4 = QtWidgets.QWidget(parent=self.frame)
@@ -238,13 +273,17 @@ class Ui_PytubeDownloader(object):
         self.verticalLayoutWidget_3 = QtWidgets.QWidget(parent=self.frame)
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(20, 170, 751, 41))
         self.verticalLayoutWidget_3.setObjectName("verticalLayoutWidget_3")
-        self.Exception_Layout = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_3)
+        self.Exception_Layout = QtWidgets.QVBoxLayout(
+            self.verticalLayoutWidget_3)
         self.Exception_Layout.setContentsMargins(0, 0, 0, 0)
         self.Exception_Layout.setObjectName("Exception_Layout")
-        self.Url_Exception = QtWidgets.QTextBrowser(parent=self.verticalLayoutWidget_3)
+        self.Url_Exception = QtWidgets.QTextBrowser(
+            parent=self.verticalLayoutWidget_3)
         self.Url_Exception.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
-        self.Url_Exception.setVerticalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
-        self.Url_Exception.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.Url_Exception.setVerticalScrollBarPolicy(
+            QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.Url_Exception.setHorizontalScrollBarPolicy(
+            QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.Url_Exception.setObjectName("Url_Exception")
         self.Exception_Layout.addWidget(self.Url_Exception)
         self.gridLayoutWidget_6 = QtWidgets.QWidget(parent=self.frame)
@@ -254,13 +293,15 @@ class Ui_PytubeDownloader(object):
         self.gridLayout_8.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_8.setObjectName("gridLayout_8")
         self.txtgithub = QtWidgets.QLabel(parent=self.gridLayoutWidget_6)
-        self.txtgithub.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.txtgithub.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.txtgithub.setStyleSheet("text-decoration:none;")
         self.txtgithub.setOpenExternalLinks(True)
         self.txtgithub.setObjectName("txtgithub")
         self.gridLayout_8.addWidget(self.txtgithub, 0, 2, 1, 1)
         self.githubgif = QtWidgets.QLabel(parent=self.gridLayoutWidget_6)
-        self.githubgif.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.githubgif.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.githubgif.setText("")
         self.githubgif.setOpenExternalLinks(True)
         self.githubgif.setObjectName("githubgif")
@@ -271,14 +312,16 @@ class Ui_PytubeDownloader(object):
         self.btnDownloadOptions.setStyleSheet(open(r'css\style.css').read())
         self.video_type.setStyleSheet(open(r'css\style.css').read())
         self.video_qtd.setStyleSheet(open(r'css\style.css').read())
-        self.video_title.setStyleSheet(open(r'css\style.css').read()) 
-        self.Url_Exception.setStyleSheet(open(r'css\style.css').read()) 
+        self.video_title.setStyleSheet(open(r'css\style.css').read())
+        self.Url_Exception.setStyleSheet(open(r'css\style.css').read())
         self.txtgithub.setStyleSheet(open(r'css\style.css').read())
         self.retranslateUi(PytubeDownloader)
         QtCore.QMetaObject.connectSlotsByName(PytubeDownloader)
 
     def retranslateUi(self, PytubeDownloader):
         _translate = QtCore.QCoreApplication.translate
-        PytubeDownloader.setWindowTitle(_translate("PytubeDownloader", "Youtube Downloader"))
-        self.app_title.setText(_translate("PytubeDownloader", "PYVIDEO DOWNLOADER"))
+        PytubeDownloader.setWindowTitle(_translate(
+            "PytubeDownloader", "PyVideoDownloader | Search"))
+        self.app_title.setText(_translate(
+            "PytubeDownloader", "PYVIDEO DOWNLOADER"))
         self.txtgithub.setText(_translate("PytubeDownloader", "GitHub"))

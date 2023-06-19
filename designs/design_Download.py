@@ -11,10 +11,11 @@ from PySide6 import QtCore, QtGui, QtWidgets
 
 class Ui_Download_Screen(object):
     def setupUi(self, Download_Screen):
-        Download_Screen.setObjectName("Download_Screen")
+        Download_Screen.setObjectName("PyVideoDownloader | Download")
         Download_Screen.resize(800, 600)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("designs\\bkp_ui\\../../imgs/icons8-download-40.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("designs\\bkp_ui\\../../imgs/icons8-download-40.png"),
+                       QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         Download_Screen.setWindowIcon(icon)
         Download_Screen.setStyleSheet("background-color:#fff;")
         self.centralwidget = QtWidgets.QWidget(parent=Download_Screen)
@@ -46,18 +47,21 @@ class Ui_Download_Screen(object):
         self.gridLayout_3 = QtWidgets.QGridLayout(self.gridLayoutWidget_3)
         self.gridLayout_3.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_3.setObjectName("gridLayout_3")
-        self.StatusMessage = QtWidgets.QTextBrowser(parent=self.gridLayoutWidget_3)
+        self.StatusMessage = QtWidgets.QTextBrowser(
+            parent=self.gridLayoutWidget_3)
         self.StatusMessage.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
         self.StatusMessage.setObjectName("StatusMessage")
         self.gridLayout_3.addWidget(self.StatusMessage, 0, 0, 1, 1)
         self.btnHome = QtWidgets.QPushButton(parent=self.centralwidget)
         self.btnHome.setEnabled(True)
         self.btnHome.setGeometry(QtCore.QRect(420, 430, 71, 51))
-        self.btnHome.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnHome.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnHome.setStyleSheet("")
         self.btnHome.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("designs\\bkp_ui\\../../imgs/icons8-home-page.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("designs\\bkp_ui\\../../imgs/icons8-home-page.png"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnHome.setIcon(icon1)
         self.btnHome.setIconSize(QtCore.QSize(50, 50))
         self.btnHome.setFlat(False)
@@ -65,11 +69,13 @@ class Ui_Download_Screen(object):
         self.btnMediaPlayer = QtWidgets.QPushButton(parent=self.centralwidget)
         self.btnMediaPlayer.setEnabled(True)
         self.btnMediaPlayer.setGeometry(QtCore.QRect(320, 430, 71, 51))
-        self.btnMediaPlayer.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnMediaPlayer.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnMediaPlayer.setStyleSheet("")
         self.btnMediaPlayer.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("designs\\bkp_ui\\../../imgs/icons8-player-50.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("designs\\bkp_ui\\../../imgs/icons8-player-50.png"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnMediaPlayer.setIcon(icon2)
         self.btnMediaPlayer.setIconSize(QtCore.QSize(45, 45))
         self.btnMediaPlayer.setFlat(False)
@@ -83,14 +89,15 @@ class Ui_Download_Screen(object):
         self.txthome.setText("")
         self.txthome.setObjectName("txthome")
         Download_Screen.setCentralWidget(self.centralwidget)
-        self.VideoTitle.setStyleSheet(open(r'css\style.css').read()) 
-        self.btnHome.setStyleSheet(open(r'css\style.css').read()) 
-        self.btnMediaPlayer.setStyleSheet(open(r'css\style.css').read()) 
-        self.txthome.setStyleSheet(open(r'css\style.css').read()) 
-        self.txtpath.setStyleSheet(open(r'css\style.css').read()) 
+        self.VideoTitle.setStyleSheet(open(r'css\style.css').read())
+        self.btnHome.setStyleSheet(open(r'css\style.css').read())
+        self.btnMediaPlayer.setStyleSheet(open(r'css\style.css').read())
+        self.txthome.setStyleSheet(open(r'css\style.css').read())
+        self.txtpath.setStyleSheet(open(r'css\style.css').read())
         self.retranslateUi(Download_Screen)
         QtCore.QMetaObject.connectSlotsByName(Download_Screen)
 
     def retranslateUi(self, Download_Screen):
         _translate = QtCore.QCoreApplication.translate
-        Download_Screen.setWindowTitle(_translate("Download_Screen", "Download Screen"))
+        Download_Screen.setWindowTitle(_translate(
+            "Download_Screen", "PyVideoDownloader | Download"))

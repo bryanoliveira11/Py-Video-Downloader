@@ -1,15 +1,17 @@
-from PySide6.QtWidgets import QMainWindow, QApplication, QFileDialog
-from PySide6.QtGui import QPixmap, QImage, QMovie
-from PySide6.QtCore import QThread, Signal, Qt
+import os
+import re
+import sys
+from time import sleep
+
+import requests
+from PySide6.QtCore import Qt, QThread, Signal
+from PySide6.QtGui import QImage, QMovie, QPixmap
+from PySide6.QtWidgets import QApplication, QFileDialog, QMainWindow
+from pytube import Playlist, YouTube
+
+from designs.design_Download import Ui_Download_Screen
 from designs.design_Main import Ui_PytubeDownloader
 from designs.design_Options import Ui_DownloaderOptions
-from designs.design_Download import Ui_Download_Screen
-import os
-from pytube import YouTube, Playlist
-import sys
-import re
-from time import sleep
-import requests
 
 
 class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
@@ -25,43 +27,43 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
         self.Video_Title = ''
         self.url_info.setText(
             "Copy and Paste the Youtube Video or Playlist Link Here :"
-            )
+        )
         self.Thumb_Image = QImage()
 
         # search video function
         self.btnSearchVideo.clicked.connect(self.SearchVideoURL)
         # second window function
-        self.btnDownloadOptions.clicked.connect(self.Open_Options_Window) 
+        self.btnDownloadOptions.clicked.connect(self.Open_Options_Window)
 
         # set python gif to the screen
         python_gif = QMovie(
             ".\\designs\\bkp_ui\\../../imgs/pythongif.gif"
-            )
+        )
         self.python_ico.setMovie(python_gif)
         python_gif.start()
 
         # set github gif to the screen
         github_gif = QMovie(
             ".\\designs\\bkp_ui\\../../imgs/github_gif.gif"
-            )
+        )
         self.githubgif.setMovie(github_gif)
         github_gif.start()
 
         self.txtgithub.setOpenExternalLinks(True)
         self.txtgithub.setText(
             "<a href='https://github.com/bryanoliveira11'>GitHub</a>"
-            )
+        )
 
     # search video and validate re
     def SearchVideoURL(self):
         # re for videos
         self.VIDEO_RE = (
             r'^(http(s):\/\/.)[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)$'
-            )
+        )
         # re for playlist
         self.PLAYLIST_RE = (
             r'^https?:\/\/(www.youtube.com|youtube.com)\/playlist(.*)$'
-            )
+        )
 
         # URL inputed by user
         self.Video_URL = str(self.Url_Input.text()).strip().replace(' ', '')
@@ -81,7 +83,7 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
             self.Url_Exception.setText(
                 '[ERROR] : Not Possible to Search the URL. Try Again ! <br/> \
                 Make Sure that the Video/Playlist is not Private.'
-                )
+            )
             self.Url_Exception.setAlignment(Qt.AlignCenter)
             self.HideVideoContent()
 
@@ -102,7 +104,7 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
             # this will get the first video thumbnail url
             Url_ThumbNail = YouTube(
                 self.Youtube_Video.video_urls[0]
-                ).thumbnail_url
+            ).thumbnail_url
 
             # get the amount of videos in the playlist
             self.Quantity_of_Videos = self.Youtube_Video.length
@@ -115,7 +117,7 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
         self.Thumb_Image.loadFromData(requests.get(Url_ThumbNail).content)
         self.video_thumb.setPixmap(
             QPixmap(self.Thumb_Image).scaledToWidth(303)
-            )
+        )
         self.video_thumb.setAlignment(Qt.AlignCenter)
 
     # that function will display the next button,
@@ -166,7 +168,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
         # resolutions and playlist lists / function to validate all
         self.Resolutions_List = [
             self.Res_1080p, self.Res_720p, self.Res_480p, self.Res_360p
-            ]
+        ]
         self.Playlist_OptionsList = [self.D_Full, self.D_Interval]
         self.Playlist_InputsList = [self.End_Num, self.Start_Num]
 
@@ -189,7 +191,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
     def getvideoTitleThumbnail(self):
         self.video_thumb_opt.setPixmap(
             QPixmap(self.MainWindowAttributes.Thumb_Image).scaledToWidth(360)
-            )
+        )
         self.video_thumb_opt.setAlignment(Qt.AlignCenter)
 
         if not self.MainWindowAttributes.Type_of_URL == 'PLAYLIST':
@@ -296,7 +298,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
             if not self.Download_Folder:
                 self.path_show.setText(
                     '[INFO] : Your Download Path is Empty ! '
-                    )
+                )
                 return
 
             DownloadPath.write(self.Download_Folder)
@@ -308,31 +310,30 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
             with open('DownloadPath.txt') as readPath:
                 self.path_show.setText(readPath.read())
         except FileNotFoundError:
-            self.Download_Exception.setText('[INFO] : Choose a Path to \
-            Download Before Start \
-            Downloading !')
+            self.Download_Exception.setText(
+                '[INFO] : Choose a Path to Download Before Start Downloading !')
 
     def StartDownloadValidations(self):
         try:
             # try to read the path to download
             with open('DownloadPath.txt') as readPath:
                 self.Path = readPath.read()
-                if self.Path == '':
+                if self.Path is None:
                     self.Download_Exception.setText(
                         '[INFO] : Choose a Path to Download Before Start Downloading !'
-                        )
+                    )
                     return
 
         except FileNotFoundError:
             self.Download_Exception.setText(
                 '[INFO] : Choose a Path to Download First !'
-                )
+            )
             return
 
         if self.MainWindowAttributes.Type_of_URL == 'PLAYLIST' and self.Playlist_Download is None or self.Resolution_Download is None:
             self.Download_Exception.setText(
                 '[INFO] : Check all the Options to Download !'
-                )
+            )
             return
 
         if not self.MainWindowAttributes.Type_of_URL == 'PLAYLIST' and self.Resolution_Download is not None:
@@ -348,16 +349,16 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
     def DownloadThread_Start(self, thread_name):
         thread_name.ShowVideoTitle.connect(
             self.DownloadWindow.UpdateUI_Title
-            )
+        )
         thread_name.Update_Gif.connect(
             self.DownloadWindow.UpdateUI_GIFS
-            )
+        )
         thread_name.Status_Text.connect(
             self.DownloadWindow.UpdateUI_Status
-            )
+        )
         thread_name.Media_Home_Btns.connect(
             self.DownloadWindow.UpdateUI_ShowBtns
-            )
+        )
         thread_name.start()
 
     # Function to download a single video, it calls the SV Thread and uses
@@ -367,7 +368,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
         self.DownloadSV_Thread = DownloadSingleVideo_Thread(
             self.MainWindowAttributes.Youtube_Video,
             self.Resolution_Download, self.Path
-            )
+        )
         self.DownloadThread_Start(self.DownloadSV_Thread)
 
     # function to download full playlist calls a DownloadFP_Thread thread
@@ -377,7 +378,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
             self.MainWindowAttributes.Youtube_Video,
             self.Resolution_Download, self.Path,
             self.MainWindowAttributes.Quantity_of_Videos
-            )
+        )
         self.DownloadThread_Start(self.DownloadFP_Thread)
 
     # function to download interval videos of a playlist
@@ -398,24 +399,24 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
             self.EndInterval = int(self.End_Num.text())
             self.ListAll_URLS = (
                 [0, *self.MainWindowAttributes.Youtube_Video.video_urls]
-                )  # list of all urls in the playlist
+            )  # list of all urls in the playlist
 
             self.Current_URL = None  # it will save the current URL in the loop
             self.URL_Counter = 0  # counter starts at 0
             self.List_Interval_URLS = self.ListAll_URLS[
                 self.StartInterval:self.EndInterval+1
-                ]
+            ]
 
             if self.StartInterval > self.EndInterval or self.StartInterval > self.MainWindowAttributes.Quantity_of_Videos or self.EndInterval > self.MainWindowAttributes.Quantity_of_Videos or self.StartInterval < 0 or self.EndInterval < 0 or self.StartInterval == 0 or self.EndInterval == 0:
                 self.Download_Exception.setText(
                     f"[INFO] : Input Only Bigger Than 0 and in Range {self.MainWindowAttributes.Quantity_of_Videos} Numbers ! Start Must be < End "
-                    )
+                )
                 self.Start_Num.setText('')
                 self.End_Num.setText('')
             elif self.StartInterval == self.EndInterval:
                 self.Download_Exception.setText(
                     "[INFO] : Your Start Can't be the Same as Your End "
-                    )
+                )
                 self.End_Num.setText('')
             else:
                 self.DownloadIntervalPlaylist()
@@ -439,7 +440,7 @@ class DownloadWindow(Ui_Download_Screen, QMainWindow):
         self.btnHome.clicked.connect(self.BacktoHome)  # return to main window
         self.btnMediaPlayer.clicked.connect(
             lambda: os.startfile(self.MainWindowAttributes.Path)
-            )  # open the path file
+        )  # open the path file
 
     def UpdateStatusGif(self, gif_path):
         loading_gif = QMovie(gif_path)
@@ -461,7 +462,7 @@ class DownloadWindow(Ui_Download_Screen, QMainWindow):
         self.StatusMessage.setAlignment(Qt.AlignCenter)
         self.StatusMessage.setStyleSheet(
             f"font: 75 11pt;Segoe UI;font-weight: 700;margin-left: 2px;color:{color}"
-            )
+        )
 
     def UpdateUI_GIFS(self, gif_path):  # function that updates the status gif
         self.UpdateStatusGif(gif_path)
@@ -501,7 +502,7 @@ class DownloadSingleVideo_Thread(QThread):
                 self.youtube_video.streams.filter(
                     progressive=True, file_extension='mp4').order_by(
                         'resolution'
-                        ).desc().first().download(f'{self.path}')
+                ).desc().first().download(f'{self.path}')
             else:
                 self.youtube_video.streams.filter(
                     res=self.resolution_download,
@@ -512,21 +513,21 @@ class DownloadSingleVideo_Thread(QThread):
             self.youtube_video.register_on_complete_callback(
                 self.Update_Gif.emit(
                     ".\\designs\\bkp_ui\\../../imgs/sucess_gif.gif"
-                    )
                 )
+            )
             self.Status_Text.emit(
                 "#1aa839", "[SUCESS] : VIDEO DOWNLOADED SUCCESFULLY ! "
-                )
+            )
 
             sleep(1.2)
 
         except Exception:
             self.Update_Gif.emit(
                 ".\\designs\\bkp_ui\\../../imgs/error_gif.gif"
-                )
+            )
             self.Status_Text.emit(
                 "#7a1c15", "[ERROR] : NOT POSSIBLE TO DOWNLOAD  !  THE VIDEO PROBABLY IS NOT PUBLIC OR HAS AGE RESTRICTIONS OR IS UNAVAILABLE / BLOCKED BY REGION."
-                )
+            )
 
         self.Media_Home_Btns.emit()
 
@@ -554,37 +555,37 @@ class DownloadFP_Thread(QThread):
             try:
                 self.ShowVideoTitle.emit(
                     f'PLAYLIST : {self.youtube_video.title} - ({self.QuantityVideos} VIDEOS)'
-                    )
+                )
                 self.Update_Gif.emit(
                     ".\\designs\\bkp_ui\\../../imgs/loading_gif.gif"
-                    )
+                )
                 self.Status_Text.emit(
                     "#2c2c2c", f"[STATUS] : DOWNLOADING VIDEO {self.VideoCount} of {self.QuantityVideos} From PLAYLIST ... "
-                    )
+                )
 
                 if not videos.streams.filter(res=self.resolution_download, progressive=True, file_extension='mp4'):
                     videos.streams.filter(
                         progressive=True, file_extension='mp4').order_by(
                             'resolution'
-                            ).desc().first().download(f'{self.path}')
+                    ).desc().first().download(f'{self.path}')
                 else:
                     videos.streams.filter(
                         progressive=True, file_extension='mp4',
                         res=self.resolution_download).first().download(
                             f'{self.path}'
-                            )
+                    )
 
                 videos.register_on_complete_callback(
                     self.Update_Gif.emit(
                         ".\\designs\\bkp_ui\\../../imgs/sucess_gif.gif"
-                        )
                     )
+                )
                 self.VideoCount += 1
                 videos.register_on_complete_callback(
                     self.Status_Text.emit(
-                        "#1aa839", "[SUCESS] : VIDEOS DOWNLOADED SUCCESFULLY ! "
-                        )
+                        "#1aa839", "[SUCESS] : VIDEOS DOWNLOADED SUCCESFULLY !"
                     )
+                )
 
             # not interrupt an download in case of an error in a video
             except Exception:
@@ -600,7 +601,7 @@ class DownloadFP_Thread(QThread):
         if self.SkippedVideos != []:
             self.Status_Text.emit(
                 "#7a1c15", f"[INFO] : THE FOLLOWING VIDEO(S) WERE UNAVAILABLE TO DOWNLOAD : {self.SkippedVideos}"
-                )
+            )
 
 
 # thread used when download is a interval of a playlist
@@ -645,7 +646,7 @@ class DownloadIP_Thread(QThread):
                 )
 
                 # optimal download when stream is none
-                if not self.Current_URL.streams.filter(res=self.resolution_download, progressive=True,file_extension='mp4'):
+                if not self.Current_URL.streams.filter(res=self.resolution_download, progressive=True, file_extension='mp4'):
                     self.Current_URL.streams.filter(
                         progressive=True, file_extension='mp4'
                     ).order_by('resolution').desc().first().download(
@@ -662,14 +663,14 @@ class DownloadIP_Thread(QThread):
                 self.Current_URL.register_on_complete_callback(
                     self.Update_Gif.emit(
                         ".\\designs\\bkp_ui\\../../imgs/sucess_gif.gif"
-                        )
-                    ) 
+                    )
+                )
                 self.VideoCount += 1
                 self.Current_URL.register_on_complete_callback(
                     self.Status_Text.emit(
-                        "#1aa839",f"[SUCESS] : VIDEOS {self.Start} to {self.End} of PLAYLIST DOWNLOADED SUCCESFULLY ! "
-                        )
+                        "#1aa839", f"[SUCESS] : VIDEOS {self.Start} to {self.End} of PLAYLIST DOWNLOADED SUCCESFULLY ! "
                     )
+                )
 
             # not interrupt an download in case of an error in a video
             except Exception:
@@ -685,12 +686,12 @@ class DownloadIP_Thread(QThread):
         if self.SkippedVideos != []:
             self.Status_Text.emit(
                 "#7a1c15", f"[INFO] : THE FOLLOWING VIDEO(S) WERE UNAVAILABLE TO DOWNLOAD : {self.SkippedVideos}"
-                )
+            )
             self.Current_URL.register_on_complete_callback(
                 self.Update_Gif.emit(
                     ".\\designs\\bkp_ui\\../../imgs/sucess_gif.gif"
-                    )
                 )
+            )
 
 
 if __name__ == '__main__':

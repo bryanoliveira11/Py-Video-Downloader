@@ -11,11 +11,13 @@ from PySide6 import QtCore, QtGui, QtWidgets
 
 class Ui_DownloaderOptions(object):
     def setupUi(self, DownloaderOptions):
-        DownloaderOptions.setObjectName("DownloaderOptions")
-        DownloaderOptions.setWindowModality(QtCore.Qt.WindowModality.ApplicationModal)
+        DownloaderOptions.setObjectName("PyVideoDownloader | Options")
+        DownloaderOptions.setWindowModality(
+            QtCore.Qt.WindowModality.ApplicationModal)
         DownloaderOptions.resize(796, 600)
         icon = QtGui.QIcon()
-        icon.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-settings-48.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-settings-48.png"),
+                       QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         DownloaderOptions.setWindowIcon(icon)
         DownloaderOptions.setStyleSheet("background-color: #fff;")
         DownloaderOptions.setTabShape(QtWidgets.QTabWidget.TabShape.Rounded)
@@ -30,27 +32,34 @@ class Ui_DownloaderOptions(object):
         self.btnDownload = QtWidgets.QPushButton(parent=self.frame)
         self.btnDownload.setEnabled(True)
         self.btnDownload.setGeometry(QtCore.QRect(410, 500, 161, 41))
-        self.btnDownload.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnDownload.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnDownload.setStyleSheet("")
         self.btnDownload.setFlat(False)
         self.btnDownload.setObjectName("btnDownload")
         self.horizontalLayoutWidget_3 = QtWidgets.QWidget(parent=self.frame)
-        self.horizontalLayoutWidget_3.setGeometry(QtCore.QRect(630, 220, 161, 61))
+        self.horizontalLayoutWidget_3.setGeometry(
+            QtCore.QRect(630, 220, 161, 61))
         self.horizontalLayoutWidget_3.setObjectName("horizontalLayoutWidget_3")
         self.Play_options = QtWidgets.QGridLayout(self.horizontalLayoutWidget_3)
         self.Play_options.setContentsMargins(0, 0, 0, 0)
         self.Play_options.setObjectName("Play_options")
         self.D_Full = QtWidgets.QCheckBox(parent=self.horizontalLayoutWidget_3)
-        self.D_Full.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.D_Full.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.D_Full.setStyleSheet("color:black")
         self.D_Full.setChecked(False)
         self.D_Full.setObjectName("D_Full")
-        self.Play_options.addWidget(self.D_Full, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
-        self.D_Interval = QtWidgets.QCheckBox(parent=self.horizontalLayoutWidget_3)
-        self.D_Interval.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.Play_options.addWidget(
+            self.D_Full, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.D_Interval = QtWidgets.QCheckBox(
+            parent=self.horizontalLayoutWidget_3)
+        self.D_Interval.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.D_Interval.setStyleSheet("color:black")
         self.D_Interval.setObjectName("D_Interval")
-        self.Play_options.addWidget(self.D_Interval, 1, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.Play_options.addWidget(
+            self.D_Interval, 1, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayoutWidget_14 = QtWidgets.QWidget(parent=self.frame)
         self.gridLayoutWidget_14.setGeometry(QtCore.QRect(320, 390, 131, 31))
         self.gridLayoutWidget_14.setObjectName("gridLayoutWidget_14")
@@ -60,22 +69,25 @@ class Ui_DownloaderOptions(object):
         self.D_Path_Text = QtWidgets.QLabel(parent=self.gridLayoutWidget_14)
         self.D_Path_Text.setStyleSheet("")
         self.D_Path_Text.setObjectName("D_Path_Text")
-        self.gridLayout_18.addWidget(self.D_Path_Text, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.gridLayout_18.addWidget(
+            self.D_Path_Text, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.horizontalLayoutWidget_5 = QtWidgets.QWidget(parent=self.frame)
-        self.horizontalLayoutWidget_5.setGeometry(QtCore.QRect(720, 290, 99, 33))
+        self.horizontalLayoutWidget_5.setGeometry(
+            QtCore.QRect(720, 290, 99, 33))
         self.horizontalLayoutWidget_5.setObjectName("horizontalLayoutWidget_5")
-        self.Interval_options_end = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_5)
+        self.Interval_options_end = QtWidgets.QHBoxLayout(
+            self.horizontalLayoutWidget_5)
         self.Interval_options_end.setContentsMargins(0, 0, 0, 0)
         self.Interval_options_end.setObjectName("Interval_options_end")
         self.End_Num = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_5)
         self.End_Num.setStyleSheet("background:#657683;\n"
-"margin-left: 15px;\n"
-"margin-right: 15px;\n"
-"margin-bottom:12px;\n"
-"border-radius: 4px;\n"
-"color: #eee;\n"
-"font: 8pt \"Segoe UI Historic\";\n"
-"padding: 1px")
+                                   "margin-left: 15px;\n"
+                                   "margin-right: 15px;\n"
+                                   "margin-bottom:12px;\n"
+                                   "border-radius: 4px;\n"
+                                   "color: #eee;\n"
+                                   "font: 8pt \"Segoe UI Historic\";\n"
+                                   "padding: 1px")
         self.End_Num.setText("")
         self.End_Num.setObjectName("End_Num")
         self.Interval_options_end.addWidget(self.End_Num)
@@ -84,87 +96,111 @@ class Ui_DownloaderOptions(object):
         palette = QtGui.QPalette()
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Button, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.Button, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Text, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Base, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.Window, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
         brush.setStyle(QtCore.Qt.BrushStyle.NoBrush)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Active, QtGui.QPalette.ColorRole.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Active,
+                         QtGui.QPalette.ColorRole.PlaceholderText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Button, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.Button, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Text, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Base, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.Window, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
         brush.setStyle(QtCore.Qt.BrushStyle.NoBrush)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive, QtGui.QPalette.ColorRole.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Inactive,
+                         QtGui.QPalette.ColorRole.PlaceholderText, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.WindowText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.WindowText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Button, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.Button, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Text, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.Text, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.ButtonText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.ButtonText, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Base, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.Base, brush)
         brush = QtGui.QBrush(QtGui.QColor(255, 255, 255))
         brush.setStyle(QtCore.Qt.BrushStyle.SolidPattern)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.Window, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.Window, brush)
         brush = QtGui.QBrush(QtGui.QColor(0, 0, 0, 128))
         brush.setStyle(QtCore.Qt.BrushStyle.NoBrush)
-        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled, QtGui.QPalette.ColorRole.PlaceholderText, brush)
+        palette.setBrush(QtGui.QPalette.ColorGroup.Disabled,
+                         QtGui.QPalette.ColorRole.PlaceholderText, brush)
         self.line.setPalette(palette)
         self.line.setStyleSheet("")
         self.line.setFrameShape(QtWidgets.QFrame.Shape.HLine)
         self.line.setFrameShadow(QtWidgets.QFrame.Shadow.Sunken)
         self.line.setObjectName("line")
         self.horizontalLayoutWidget_6 = QtWidgets.QWidget(parent=self.frame)
-        self.horizontalLayoutWidget_6.setGeometry(QtCore.QRect(610, 290, 99, 33))
+        self.horizontalLayoutWidget_6.setGeometry(
+            QtCore.QRect(610, 290, 99, 33))
         self.horizontalLayoutWidget_6.setObjectName("horizontalLayoutWidget_6")
-        self.Interval_options_start = QtWidgets.QHBoxLayout(self.horizontalLayoutWidget_6)
+        self.Interval_options_start = QtWidgets.QHBoxLayout(
+            self.horizontalLayoutWidget_6)
         self.Interval_options_start.setContentsMargins(0, 0, 0, 0)
         self.Interval_options_start.setObjectName("Interval_options_start")
-        self.Start_Num = QtWidgets.QLineEdit(parent=self.horizontalLayoutWidget_6)
+        self.Start_Num = QtWidgets.QLineEdit(
+            parent=self.horizontalLayoutWidget_6)
         self.Start_Num.setStyleSheet("background:#657683;\n"
-"margin-left: 15px;\n"
-"margin-right: 15px;\n"
-"margin-bottom:12px;\n"
-"border-radius: 4px;\n"
-"color: #eee;\n"
-"font: 8pt \"Segoe UI Historic\";\n"
-"padding: 1px")
+                                     "margin-left: 15px;\n"
+                                     "margin-right: 15px;\n"
+                                     "margin-bottom:12px;\n"
+                                     "border-radius: 4px;\n"
+                                     "color: #eee;\n"
+                                     "font: 8pt \"Segoe UI Historic\";\n"
+                                     "padding: 1px")
         self.Start_Num.setText("")
         self.Start_Num.setObjectName("Start_Num")
         self.Interval_options_start.addWidget(self.Start_Num)
@@ -175,38 +211,49 @@ class Ui_DownloaderOptions(object):
         self.resolutions.setContentsMargins(0, 0, 0, 0)
         self.resolutions.setObjectName("resolutions")
         self.Res_1080p = QtWidgets.QCheckBox(parent=self.horizontalLayoutWidget)
-        self.Res_1080p.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.Res_1080p.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.Res_1080p.setStyleSheet("color:black")
         self.Res_1080p.setChecked(False)
         self.Res_1080p.setObjectName("Res_1080p")
-        self.resolutions.addWidget(self.Res_1080p, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.resolutions.addWidget(
+            self.Res_1080p, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.Res_720p = QtWidgets.QCheckBox(parent=self.horizontalLayoutWidget)
-        self.Res_720p.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.Res_720p.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.Res_720p.setStyleSheet("color:black")
         self.Res_720p.setObjectName("Res_720p")
-        self.resolutions.addWidget(self.Res_720p, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.resolutions.addWidget(
+            self.Res_720p, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.Res_480p = QtWidgets.QCheckBox(parent=self.horizontalLayoutWidget)
-        self.Res_480p.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.Res_480p.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.Res_480p.setStyleSheet("color:black")
         self.Res_480p.setObjectName("Res_480p")
-        self.resolutions.addWidget(self.Res_480p, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.resolutions.addWidget(
+            self.Res_480p, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.Res_360p = QtWidgets.QCheckBox(parent=self.horizontalLayoutWidget)
-        self.Res_360p.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.Res_360p.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.Res_360p.setStyleSheet("color:black")
         self.Res_360p.setObjectName("Res_360p")
-        self.resolutions.addWidget(self.Res_360p, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.resolutions.addWidget(
+            self.Res_360p, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayoutWidget_15 = QtWidgets.QWidget(parent=self.frame)
         self.gridLayoutWidget_15.setGeometry(QtCore.QRect(460, 390, 78, 41))
         self.gridLayoutWidget_15.setObjectName("gridLayoutWidget_15")
         self.gridLayout_19 = QtWidgets.QGridLayout(self.gridLayoutWidget_15)
         self.gridLayout_19.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_19.setObjectName("gridLayout_19")
-        self.btnSearchFolder = QtWidgets.QPushButton(parent=self.gridLayoutWidget_15)
-        self.btnSearchFolder.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnSearchFolder = QtWidgets.QPushButton(
+            parent=self.gridLayoutWidget_15)
+        self.btnSearchFolder.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnSearchFolder.setStyleSheet("")
         self.btnSearchFolder.setText("")
         icon1 = QtGui.QIcon()
-        icon1.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-live-folder-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon1.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-live-folder-64.png"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnSearchFolder.setIcon(icon1)
         self.btnSearchFolder.setIconSize(QtCore.QSize(64, 26))
         self.btnSearchFolder.setObjectName("btnSearchFolder")
@@ -220,14 +267,14 @@ class Ui_DownloaderOptions(object):
         self.app_title = QtWidgets.QLabel(parent=self.verticalLayoutWidget)
         self.app_title.setLayoutDirection(QtCore.Qt.LayoutDirection.LeftToRight)
         self.app_title.setStyleSheet("font: 63 20pt \"Sitka Heading Semibold\";\n"
-"color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.522727 rgba(84, 155, 255, 255), stop:0.710227 rgba(77, 131, 230, 255));\n"
-"border-radius:11px;\n"
-"margin-left:15px;\n"
-"margin-top:5px;\n"
-"margin-bottom:5px;\n"
-"padding-right:12px;\n"
-"padding-left:12px;\n"
-"")
+                                     "color:qlineargradient(spread:pad, x1:0, y1:0, x2:1, y2:1, stop:0.522727 rgba(84, 155, 255, 255), stop:0.710227 rgba(77, 131, 230, 255));\n"
+                                     "border-radius:11px;\n"
+                                     "margin-left:15px;\n"
+                                     "margin-top:5px;\n"
+                                     "margin-bottom:5px;\n"
+                                     "padding-right:12px;\n"
+                                     "padding-left:12px;\n"
+                                     "")
         self.app_title.setFrameShape(QtWidgets.QFrame.Shape.WinPanel)
         self.app_title.setFrameShadow(QtWidgets.QFrame.Shadow.Plain)
         self.app_title.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
@@ -243,17 +290,20 @@ class Ui_DownloaderOptions(object):
         self.Play_Text.setEnabled(True)
         self.Play_Text.setStyleSheet("")
         self.Play_Text.setObjectName("Play_Text")
-        self.gridLayout_16.addWidget(self.Play_Text, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.gridLayout_16.addWidget(
+            self.Play_Text, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayoutWidget_2 = QtWidgets.QWidget(parent=self.frame)
         self.gridLayoutWidget_2.setGeometry(QtCore.QRect(60, 110, 731, 61))
         self.gridLayoutWidget_2.setObjectName("gridLayoutWidget_2")
         self.gridLayout_6 = QtWidgets.QGridLayout(self.gridLayoutWidget_2)
         self.gridLayout_6.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_6.setObjectName("gridLayout_6")
-        self.video_title_opt = QtWidgets.QTextBrowser(parent=self.gridLayoutWidget_2)
+        self.video_title_opt = QtWidgets.QTextBrowser(
+            parent=self.gridLayoutWidget_2)
         self.video_title_opt.setEnabled(False)
         self.video_title_opt.setFrameShape(QtWidgets.QFrame.Shape.NoFrame)
-        self.video_title_opt.setHorizontalScrollBarPolicy(QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
+        self.video_title_opt.setHorizontalScrollBarPolicy(
+            QtCore.Qt.ScrollBarPolicy.ScrollBarAlwaysOff)
         self.video_title_opt.setObjectName("video_title_opt")
         self.gridLayout_6.addWidget(self.video_title_opt, 0, 0, 1, 1)
         self.gridLayoutWidget_7 = QtWidgets.QWidget(parent=self.frame)
@@ -265,19 +315,23 @@ class Ui_DownloaderOptions(object):
         self.Res_text = QtWidgets.QLabel(parent=self.gridLayoutWidget_7)
         self.Res_text.setStyleSheet("")
         self.Res_text.setObjectName("Res_text")
-        self.gridLayout_11.addWidget(self.Res_text, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.gridLayout_11.addWidget(
+            self.Res_text, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayoutWidget_16 = QtWidgets.QWidget(parent=self.frame)
         self.gridLayoutWidget_16.setGeometry(QtCore.QRect(330, 510, 71, 36))
         self.gridLayoutWidget_16.setObjectName("gridLayoutWidget_16")
         self.gridLayout_20 = QtWidgets.QGridLayout(self.gridLayoutWidget_16)
         self.gridLayout_20.setContentsMargins(0, 0, 0, 0)
         self.gridLayout_20.setObjectName("gridLayout_20")
-        self.btnBackMain = QtWidgets.QPushButton(parent=self.gridLayoutWidget_16)
-        self.btnBackMain.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.btnBackMain = QtWidgets.QPushButton(
+            parent=self.gridLayoutWidget_16)
+        self.btnBackMain.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.btnBackMain.setStyleSheet("")
         self.btnBackMain.setText("")
         icon2 = QtGui.QIcon()
-        icon2.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-back-arrow-64.png"), QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
+        icon2.addPixmap(QtGui.QPixmap("NotUsable_at_EXE\\bkp_ui\\../../imgs/icons8-back-arrow-64.png"),
+                        QtGui.QIcon.Mode.Normal, QtGui.QIcon.State.Off)
         self.btnBackMain.setIcon(icon2)
         self.btnBackMain.setIconSize(QtCore.QSize(64, 26))
         self.btnBackMain.setObjectName("btnBackMain")
@@ -289,22 +343,28 @@ class Ui_DownloaderOptions(object):
         self.verticalLayout.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout.setObjectName("verticalLayout")
         self.path_show = QtWidgets.QLabel(parent=self.verticalLayoutWidget_2)
-        self.path_show.setCursor(QtGui.QCursor(QtCore.Qt.CursorShape.PointingHandCursor))
+        self.path_show.setCursor(QtGui.QCursor(
+            QtCore.Qt.CursorShape.PointingHandCursor))
         self.path_show.setText("")
         self.path_show.setOpenExternalLinks(True)
-        self.path_show.setTextInteractionFlags(QtCore.Qt.TextInteractionFlag.LinksAccessibleByMouse|QtCore.Qt.TextInteractionFlag.TextSelectableByMouse)
+        self.path_show.setTextInteractionFlags(
+            QtCore.Qt.TextInteractionFlag.LinksAccessibleByMouse | QtCore.Qt.TextInteractionFlag.TextSelectableByMouse)
         self.path_show.setObjectName("path_show")
-        self.verticalLayout.addWidget(self.path_show, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.verticalLayout.addWidget(
+            self.path_show, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.verticalLayoutWidget_3 = QtWidgets.QWidget(parent=self.frame)
         self.verticalLayoutWidget_3.setGeometry(QtCore.QRect(50, 550, 771, 41))
         self.verticalLayoutWidget_3.setObjectName("verticalLayoutWidget_3")
-        self.verticalLayout_2 = QtWidgets.QVBoxLayout(self.verticalLayoutWidget_3)
+        self.verticalLayout_2 = QtWidgets.QVBoxLayout(
+            self.verticalLayoutWidget_3)
         self.verticalLayout_2.setContentsMargins(0, 0, 0, 0)
         self.verticalLayout_2.setObjectName("verticalLayout_2")
-        self.Download_Exception = QtWidgets.QLabel(parent=self.verticalLayoutWidget_3)
+        self.Download_Exception = QtWidgets.QLabel(
+            parent=self.verticalLayoutWidget_3)
         self.Download_Exception.setText("")
         self.Download_Exception.setObjectName("Download_Exception")
-        self.verticalLayout_2.addWidget(self.Download_Exception, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
+        self.verticalLayout_2.addWidget(
+            self.Download_Exception, 0, QtCore.Qt.AlignmentFlag.AlignHCenter)
         self.gridLayoutWidget = QtWidgets.QWidget(parent=self.frame)
         self.gridLayoutWidget.setGeometry(QtCore.QRect(240, 180, 361, 201))
         self.gridLayoutWidget.setObjectName("gridLayoutWidget")
@@ -316,7 +376,8 @@ class Ui_DownloaderOptions(object):
         self.video_thumb_opt.setText("")
         self.video_thumb_opt.setScaledContents(False)
         self.video_thumb_opt.setObjectName("video_thumb_opt")
-        self.gridLayout_5.addWidget(self.video_thumb_opt, 0, 0, 1, 1, QtCore.Qt.AlignmentFlag.AlignHCenter|QtCore.Qt.AlignmentFlag.AlignVCenter)
+        self.gridLayout_5.addWidget(self.video_thumb_opt, 0, 0, 1, 1,
+                                    QtCore.Qt.AlignmentFlag.AlignHCenter | QtCore.Qt.AlignmentFlag.AlignVCenter)
         self.gridLayoutWidget_3 = QtWidgets.QWidget(parent=self.frame)
         self.gridLayoutWidget_3.setGeometry(QtCore.QRect(560, 20, 111, 71))
         self.gridLayoutWidget_3.setObjectName("gridLayoutWidget_3")
@@ -327,7 +388,8 @@ class Ui_DownloaderOptions(object):
         self.optionsIcon.setMaximumSize(QtCore.QSize(90, 90))
         self.optionsIcon.setStyleSheet("margin-left:16px;")
         self.optionsIcon.setText("")
-        self.optionsIcon.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading|QtCore.Qt.AlignmentFlag.AlignLeft|QtCore.Qt.AlignmentFlag.AlignTop)
+        self.optionsIcon.setAlignment(QtCore.Qt.AlignmentFlag.AlignLeading |
+                                      QtCore.Qt.AlignmentFlag.AlignLeft | QtCore.Qt.AlignmentFlag.AlignTop)
         self.optionsIcon.setIndent(-1)
         self.optionsIcon.setObjectName("optionsIcon")
         self.gridLayout.addWidget(self.optionsIcon, 0, 0, 1, 1)
@@ -346,7 +408,8 @@ class Ui_DownloaderOptions(object):
 
     def retranslateUi(self, DownloaderOptions):
         _translate = QtCore.QCoreApplication.translate
-        DownloaderOptions.setWindowTitle(_translate("DownloaderOptions", "Downloader Options"))
+        DownloaderOptions.setWindowTitle(_translate(
+            "DownloaderOptions", "PyVideoDownloader | Options"))
         self.btnDownload.setText(_translate("DownloaderOptions", "DOWNLOAD"))
         self.Res_1080p.setText(_translate("DownloaderOptions", "1080p"))
         self.Res_720p.setText(_translate("DownloaderOptions", "720p"))
