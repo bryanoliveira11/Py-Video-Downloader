@@ -2,7 +2,8 @@ from os import startfile
 
 from PySide6.QtCore import QThread, Signal
 from pytube import YouTube
-from pytube.exceptions import MaxRetriesExceeded, VideoUnavailable
+from pytube.exceptions import (MaxRetriesExceeded, RegexMatchError,
+                               VideoUnavailable)
 
 from .DownloadClass import DownloadWindow
 
@@ -22,6 +23,7 @@ class DownloadSingleVideo_Thread(QThread):
         self.resolution_download = resolution_download
         self.path = path
         self.DownloadWindow = DownloadWindow(self)
+        self.Exception = False
 
     def run(self):
         try:
@@ -56,9 +58,13 @@ class DownloadSingleVideo_Thread(QThread):
             )
             startfile(self.path)
 
-        except MaxRetriesExceeded:
-            self.Status_Text.emit(
-                "#7a1c15", "[ERROR] : Timeout While Downloading.")
+        except (MaxRetriesExceeded, RegexMatchError) as error:
+            self.Update_Gif.emit(
+                ".\\designs\\bkp_ui\\../../imgs/error_gif.gif"
+            )
+            self.Status_Text.emit("#7a1c15", f"[ERROR] : {error}")
+            self.Exception = True
+
         except VideoUnavailable:
             self.Update_Gif.emit(
                 ".\\designs\\bkp_ui\\../../imgs/error_gif.gif"
@@ -66,8 +72,12 @@ class DownloadSingleVideo_Thread(QThread):
             self.Status_Text.emit(
                 "#7a1c15", "[ERROR] : NOT POSSIBLE TO DOWNLOAD  !  THE VIDEO PROBABLY IS NOT PUBLIC OR HAS AGE RESTRICTIONS OR IS UNAVAILABLE / BLOCKED BY REGION."
             )
+            self.Exception = True
 
         self.Media_Home_Btns.emit()
+
+        if not self.Exception:
+            startfile(self.path)
 
 
 # thread used when download is a full playlist
@@ -86,6 +96,7 @@ class DownloadFP_Thread(QThread):
         self.DownloadWindow = DownloadWindow(self)
         self.SkippedVideos = []
         self.VideoCount = 1
+        self.Exception = False
 
     def run(self):
         # optimal download when stream is none
@@ -129,16 +140,23 @@ class DownloadFP_Thread(QThread):
                 self.VideoCount += 1
 
             # not interrupt an download in case of an error in a video
-            except MaxRetriesExceeded:
-                self.Status_Text.emit(
-                    "#7a1c15", "[ERROR] : Timeout While Downloading.")
+            except (MaxRetriesExceeded, RegexMatchError) as error:
+                self.Update_Gif.emit(
+                    ".\\designs\\bkp_ui\\../../imgs/error_gif.gif"
+                )
+                self.Status_Text.emit("#7a1c15", f"[ERROR] : {error}")
+                self.Exception = True
+
             except VideoUnavailable:
                 # get the videos that were skipped for some reason
                 self.SkippedVideos.append(videos.title)
+                self.Exception = True
                 continue
 
         self.Media_Home_Btns.emit()
-        startfile(self.path)
+
+        if not self.Exception:
+            startfile(self.path)
 
         # shows videos that were skipped because of unavailability in youtube
         if self.SkippedVideos != []:
@@ -168,6 +186,7 @@ class DownloadIP_Thread(QThread):
         self.End = End
         self.SkippedVideos = []
         self.VideoCount = self.Start
+        self.Exception = False
 
     def run(self):
         # set a while loop based on counter to get
@@ -215,16 +234,23 @@ class DownloadIP_Thread(QThread):
                     )
                 )
 
-            except MaxRetriesExceeded:
-                self.Status_Text.emit(
-                    "#7a1c15", "[ERROR] : Timeout While Downloading.")
+            except (MaxRetriesExceeded, RegexMatchError) as error:
+                self.Update_Gif.emit(
+                    ".\\designs\\bkp_ui\\../../imgs/error_gif.gif"
+                )
+                self.Status_Text.emit("#7a1c15", f"[ERROR] : {error}")
+                self.Exception = True
+
             except VideoUnavailable:
                 # get the videos that were skipped
                 self.SkippedVideos.append(self.Current_URL.title)
+                self.Exception = True
                 continue
 
         self.Media_Home_Btns.emit()
-        startfile(self.path)
+
+        if not self.Exception:
+            startfile(self.path)
 
         # shows videos that were skipped because of unavailability in youtube
         if self.SkippedVideos != []:

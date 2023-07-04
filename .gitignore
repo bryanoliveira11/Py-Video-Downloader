@@ -5,3 +5,4 @@ PyVideoDownloader_pt-BR.py
 .mypy_cache
 /__pycache__
 /.vscode
+venv
