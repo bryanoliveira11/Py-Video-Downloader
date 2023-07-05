@@ -5,7 +5,7 @@ from PySide6.QtCore import Qt
 from PySide6.QtGui import QImage, QMovie, QPixmap
 from PySide6.QtWidgets import QMainWindow
 from pytube import Playlist, YouTube
-from pytube.exceptions import RegexMatchError
+from pytube.exceptions import RegexMatchError, VideoUnavailable
 
 from designs.design_Main import Ui_PytubeDownloader
 
@@ -76,7 +76,7 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
             self.getUrl_Content()
             self.ScreenSearchDefaults()
 
-        except RegexMatchError:
+        except (RegexMatchError, VideoUnavailable):
             self.Url_Exception.setText(
                 '[ERROR] : Not Possible to Search the URL. Try Again ! <br/> \
                 Make Sure that the Video/Playlist is not Private.'
