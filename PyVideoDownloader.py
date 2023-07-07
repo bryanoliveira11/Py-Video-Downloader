@@ -2,7 +2,7 @@ import sys
 
 from PySide6.QtWidgets import QApplication
 
-from Scripts import MainWindowClass
+from scripts import MainWindowClass
 
 if __name__ == '__main__':
     qt = QApplication(sys.argv)
