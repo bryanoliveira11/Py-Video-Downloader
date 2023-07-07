@@ -1,11 +1,17 @@
-from PySide6.QtCore import Qt
+from typing import Dict, List
+
 from PySide6.QtGui import QMovie, QPixmap
-from PySide6.QtWidgets import QFileDialog, QMainWindow
+from PySide6.QtWidgets import QCheckBox, QFileDialog, QLineEdit, QMainWindow
 
 from designs.design_Options import Ui_DownloaderOptions
 
 from . import MainWindowClass, threads
 from .DownloadClass import DownloadWindow
+from .settings import ALIGN_CENTER
+
+SINGLE_VIDEO_THREAD = threads.DownloadSingleVideo_Thread
+FULL_PLAYLIST_THREAD = threads.DownloadFP_Thread
+INTERVAL_THREAD = threads.DownloadIP_Thread
 
 
 class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
@@ -14,7 +20,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
         super().setupUi(self)
         self.MainWindowAttributes: MainWindowClass.PythonDownloader = MainWindow
         self.setFixedSize(800, 600)
-        self.DownloadWindow = None
+        self.DownloadWindow: DownloadWindow | None = None
 
         self.app_title.setText("DOWNLOAD OPTIONS")
         self.Play_Text.setText("PLAYLIST OPTIONS")
@@ -26,16 +32,20 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
         self.Start_Num.setPlaceholderText("start num")
 
         # set gif to the options screen
-        loading_gif = QMovie(".\\designs\\bkp_ui\\../../imgs/options_gif.gif")
+        loading_gif: QMovie = QMovie(
+            ".\\designs\\bkp_ui\\../../imgs/options_gif.gif")
         self.optionsIcon.setMovie(loading_gif)
         loading_gif.start()
 
         # resolutions and playlist lists / function to validate all
-        self.Resolutions_List = [
+        self.Resolutions_List: List[QCheckBox] = [
             self.Res_1080p, self.Res_720p, self.Res_480p, self.Res_360p
         ]
-        self.Playlist_OptionsList = [self.D_Full, self.D_Interval]
-        self.Playlist_InputsList = [self.End_Num, self.Start_Num]
+        self.Playlist_OptionsList: List[QCheckBox] = [
+            self.D_Full, self.D_Interval]
+
+        self.Playlist_InputsList: List[QLineEdit] = [
+            self.End_Num, self.Start_Num]
 
         # get the methods to work on that class
         self.getvideoTitleThumbnail()
@@ -60,7 +70,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
         self.video_thumb_opt.setPixmap(
             QPixmap(self.MainWindowAttributes.Thumb_Image).scaledToWidth(360)
         )
-        self.video_thumb_opt.setAlignment(Qt.AlignCenter)
+        self.video_thumb_opt.setAlignment(ALIGN_CENTER)
 
         if not self.MainWindowAttributes.Type_of_URL == 'PLAYLIST':
             self.video_title_opt.setText(self.MainWindowAttributes.Video_Title)
@@ -68,7 +78,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
             self.video_title_opt.setText(
                 f'{self.MainWindowAttributes.Video_Title} - ( {self.MainWindowAttributes.Quantity_of_Videos} VIDEOS )')
 
-        self.video_title_opt.setAlignment(Qt.AlignCenter)
+        self.video_title_opt.setAlignment(ALIGN_CENTER)
 
     # will disable the checkboxes when the download is a single video
     def DisablePlaylistWhenVideo(self):
@@ -84,7 +94,8 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
     def Checkboxes_Validation(self):
 
         # default None to the variables for later validations
-        self.Resolution_Download = self.Playlist_Download = None
+        self.Resolution_Download: str | None = None
+        self.Playlist_Download: str | None = None
 
         # get all checkboxes from Resolutions_List and set the function
         for Resolutions in self.Resolutions_List:
@@ -97,18 +108,19 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
     # change the checked boxes by sender validation ; Resolutions
     def ValidateResolution_CheckBoxes(self):
         try:
+
             for Res in range(len(self.Resolutions_List)):
                 self.currentResCheckbox = self.Resolutions_List[Res]
 
                 if self.currentResCheckbox.isChecked() and self.currentResCheckbox != self.sender():
                     self.currentResCheckbox.setChecked(False)
 
-                SelectedRes = {
-                    self.Res_1080p.isChecked(): '1080p',
-                    self.Res_720p.isChecked(): '720p',
-                    self.Res_480p.isChecked(): '480p',
-                    self.Res_360p.isChecked(): '360p',
-                }
+            SelectedRes: Dict[bool, str] = {
+                self.Res_1080p.isChecked(): '1080p',
+                self.Res_720p.isChecked(): '720p',
+                self.Res_480p.isChecked(): '480p',
+                self.Res_360p.isChecked(): '360p',
+            }
 
             self.Resolution_Download = SelectedRes[True]
 
@@ -214,26 +226,27 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
             self.ValidateInputs_Interval()
 
     # function to start threads and connect updateUI
-    def DownloadThread_Start(self, thread_name):
-        thread_name.ShowVideoTitle.connect(
-            self.DownloadWindow.UpdateUI_Title
-        )
-        thread_name.Update_Gif.connect(
-            self.DownloadWindow.UpdateUI_GIFS
-        )
-        thread_name.Status_Text.connect(
-            self.DownloadWindow.UpdateUI_Status
-        )
-        thread_name.Media_Home_Btns.connect(
-            self.DownloadWindow.UpdateUI_ShowBtns
-        )
-        thread_name.start()
+    def DownloadThread_Start(self, thread_name: SINGLE_VIDEO_THREAD | FULL_PLAYLIST_THREAD | INTERVAL_THREAD):
+        if self.DownloadWindow is not None:
+            thread_name.ShowVideoTitle.connect(  # type:ignore
+                self.DownloadWindow.UpdateUI_Title
+            )
+            thread_name.Update_Gif.connect(  # type:ignore
+                self.DownloadWindow.UpdateUI_GIFS
+            )
+            thread_name.Status_Text.connect(  # type:ignore
+                self.DownloadWindow.UpdateUI_Status
+            )
+            thread_name.Media_Home_Btns.connect(  # type:ignore
+                self.DownloadWindow.UpdateUI_ShowBtns
+            )
+            thread_name.start()
 
     # Function to download a single video, it calls the SV Thread and uses
     # the connect to update the UI with text and gif status
     def DownloadSingleVideo(self):
         self.OpenDownloadWindow()
-        self.DownloadSV_Thread = threads.DownloadSingleVideo_Thread(
+        self.DownloadSV_Thread = SINGLE_VIDEO_THREAD(
             self.MainWindowAttributes.Youtube_Video,
             self.Resolution_Download, self.Path
         )
@@ -242,7 +255,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
     # function to download full playlist calls a DownloadFP_Thread thread
     def DownloadFullPlaylist(self):
         self.OpenDownloadWindow()
-        self.DownloadFP_Thread = threads.DownloadFP_Thread(
+        self.DownloadFP_Thread = FULL_PLAYLIST_THREAD(
             self.MainWindowAttributes.Youtube_Video,
             self.Resolution_Download, self.Path,
             self.MainWindowAttributes.Quantity_of_Videos
@@ -252,7 +265,7 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
     # function to download interval videos of a playlist
     def DownloadIntervalPlaylist(self):
         self.OpenDownloadWindow()
-        self.DownloadIP_Thread = threads.DownloadIP_Thread(
+        self.DownloadIP_Thread = INTERVAL_THREAD(
             self.MainWindowAttributes.Youtube_Video,
             self.Resolution_Download, self.Path,
             self.MainWindowAttributes.Quantity_of_Videos,
@@ -263,10 +276,11 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
     def ValidateInputs_Interval(self):
         try:
             # user start and end inputs
-            self.StartInterval = int(self.Start_Num.text())
-            self.EndInterval = int(self.End_Num.text())
+            self.StartInterval: str | int = int(self.Start_Num.text())
+            self.EndInterval: str | int = int(self.End_Num.text())
+
             self.ListAll_URLS = (
-                [0, *self.MainWindowAttributes.Youtube_Video.video_urls]
+                [0, *self.MainWindowAttributes.Youtube_Video.video_urls]  # type:ignore
             )  # list of all urls in the playlist
 
             self.Current_URL = None  # it will save the current URL in the loop
@@ -275,7 +289,9 @@ class OptionsWindow(Ui_DownloaderOptions, QMainWindow):
                 self.StartInterval:self.EndInterval+1
             ]
 
-            if self.StartInterval > self.EndInterval or self.StartInterval > self.MainWindowAttributes.Quantity_of_Videos or self.EndInterval > self.MainWindowAttributes.Quantity_of_Videos or self.StartInterval < 0 or self.EndInterval < 0 or self.StartInterval == 0 or self.EndInterval == 0:
+            quantity_of_videos: int = self.MainWindowAttributes.Quantity_of_Videos
+
+            if self.StartInterval > self.EndInterval or self.StartInterval > quantity_of_videos or self.EndInterval > quantity_of_videos or self.StartInterval < 0 or self.EndInterval < 0 or self.StartInterval == 0 or self.EndInterval == 0:
                 self.Download_Exception.setText(
                     f"[INFO] : Input Only Bigger Than 0 and in Range {self.MainWindowAttributes.Quantity_of_Videos} Numbers ! Start Must be < End "
                 )

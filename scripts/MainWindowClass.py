@@ -1,7 +1,6 @@
 import re
 
 import requests
-from PySide6.QtCore import Qt
 from PySide6.QtGui import QImage, QMovie, QPixmap
 from PySide6.QtWidgets import QMainWindow
 from pytube import Playlist, YouTube
@@ -10,6 +9,7 @@ from pytube.exceptions import RegexMatchError, VideoUnavailable
 from designs.design_Main import Ui_PytubeDownloader
 
 from .OptionsClass import OptionsWindow
+from .settings import ALIGN_CENTER
 
 
 class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
@@ -17,16 +17,16 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
         super().__init__(parent)
         super().setupUi(self)
         self.setFixedSize(800, 600)
-        self.OptionsWindow = None
+        self.OptionsWindow: OptionsWindow | None = None
         self.btnDownloadOptions.hide()
-        self.Type_of_URL = ''
-        self.Quantity_of_Videos = ''
-        self.Video_URL = ''
-        self.Video_Title = ''
+        self.Type_of_URL: str = ''
+        self.Quantity_of_Videos: int = 0
+        self.Video_URL: str = ''
+        self.Video_Title: str = ''
         self.url_info.setText(
             "Copy and Paste the Youtube Video or Playlist Link Here :"
         )
-        self.Thumb_Image = QImage()
+        self.Thumb_Image: QImage = QImage()
 
         # search video function
         self.btnSearchVideo.clicked.connect(self.SearchVideoURL)
@@ -34,14 +34,14 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
         self.btnDownloadOptions.clicked.connect(self.Open_Options_Window)
 
         # set python gif to the screen
-        python_gif = QMovie(
+        python_gif: QMovie = QMovie(
             ".\\designs\\bkp_ui\\../../imgs/pythongif.gif"
         )
         self.python_ico.setMovie(python_gif)
         python_gif.start()
 
         # set github gif to the screen
-        github_gif = QMovie(
+        github_gif: QMovie = QMovie(
             ".\\designs\\bkp_ui\\../../imgs/github_gif.gif"
         )
         self.githubgif.setMovie(github_gif)
@@ -66,6 +66,11 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
         # URL inputed by user
         self.Video_URL = str(self.Url_Input.text()).strip().replace(' ', '')
 
+        if self.Video_URL == '':
+            self.Url_Exception.setText('Nothing to Search !')
+            self.Url_Exception.setAlignment(ALIGN_CENTER)
+            return
+
         try:
             if re.match(self.PLAYLIST_RE, self.Video_URL):
                 self.Type_of_URL = 'PLAYLIST'
@@ -81,7 +86,7 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
                 '[ERROR] : Not Possible to Search the URL. Try Again ! <br/> \
                 Make Sure that the Video/Playlist is not Private.'
             )
-            self.Url_Exception.setAlignment(Qt.AlignCenter)
+            self.Url_Exception.setAlignment(ALIGN_CENTER)
             self.Url_Input.setText('')
             self.HideVideoContent()
 
@@ -116,7 +121,7 @@ class PythonDownloader(QMainWindow, Ui_PytubeDownloader):
         self.video_thumb.setPixmap(
             QPixmap(self.Thumb_Image).scaledToWidth(303)
         )
-        self.video_thumb.setAlignment(Qt.AlignCenter)
+        self.video_thumb.setAlignment(ALIGN_CENTER)
 
     # that function will display the next button,
     # and display the type of url, quantity of videos

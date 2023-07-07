@@ -10,12 +10,12 @@ from .DownloadClass import DownloadWindow
 
 # class for downloading a single video thread
 class DownloadSingleVideo_Thread(QThread):
-    ShowVideoTitle = Signal(str)
-    Update_Gif = Signal(str)
+    ShowVideoTitle: Signal | None = Signal(str)
+    Update_Gif: Signal | None = Signal(str)
     # will receive a arg for color style and the
     # text reference at UpdateUI_Status()
-    Status_Text = Signal(str, str)
-    Media_Home_Btns = Signal()
+    Status_Text: Signal | None = Signal(str, str)
+    Media_Home_Btns: Signal | None = Signal()
 
     def __init__(self, youtube_video, resolution_download, path, parent=None):
         super().__init__(parent)
@@ -27,54 +27,67 @@ class DownloadSingleVideo_Thread(QThread):
 
     def run(self):
         try:
-            self.ShowVideoTitle.emit(f'{self.youtube_video.title}')
+            if self.ShowVideoTitle is not None:
+                self.ShowVideoTitle.emit(f'{self.youtube_video.title}')
 
-            self.Status_Text.emit("#2c2c2c", "[STATUS] : DOWNLOADING ... ")
+            if self.Status_Text is not None:
+                self.Status_Text.emit("#2c2c2c", "[STATUS] : DOWNLOADING ... ")
 
             # optimal download if streams = None Type
             if not self.youtube_video.streams.filter(res=self.resolution_download, progressive=True, file_extension='mp4'):
                 self.youtube_video.streams.filter(
                     progressive=True, file_extension='mp4').order_by(
                         'resolution'
-                ).desc().first().download(
+                ).desc().first().download(  # type:ignore
                     f'{self.path}', timeout=15, skip_existing=True, max_retries=1
                 )
             else:
                 self.youtube_video.streams.filter(
                     res=self.resolution_download,
                     file_extension='mp4',
-                    progressive=True).first().download(
+                    progressive=True).first().download(  # type:ignore
                         f'{self.path}', timeout=15, skip_existing=True, max_retries=1
                 )
 
             # update gif when download is complete
-            self.youtube_video.register_on_complete_callback(
-                self.Update_Gif.emit(
-                    ".\\designs\\bkp_ui\\../../imgs/sucess_gif.gif"
+            if self.Update_Gif is not None:
+                self.youtube_video.register_on_complete_callback(
+                    self.Update_Gif.emit(
+                        ".\\designs\\bkp_ui\\../../imgs/sucess_gif.gif"
+                    )  # type: ignore
                 )
-            )
-            self.Status_Text.emit(
-                "#1aa839", "[SUCESS] : VIDEO DOWNLOADED SUCCESFULLY ! "
-            )
-            startfile(self.path)
+
+            if self.Status_Text is not None:
+                self.Status_Text.emit(
+                    "#1aa839", "[SUCESS] : VIDEO DOWNLOADED SUCCESFULLY ! "
+                )
+                startfile(self.path)
 
         except (MaxRetriesExceeded, RegexMatchError) as error:
-            self.Update_Gif.emit(
-                ".\\designs\\bkp_ui\\../../imgs/error_gif.gif"
-            )
-            self.Status_Text.emit("#7a1c15", f"[ERROR] : {error}")
-            self.Exception = True
+            if self.Update_Gif is not None:
+                self.Update_Gif.emit(
+                    ".\\designs\\bkp_ui\\../../imgs/error_gif.gif"
+                )
+
+                if self.Status_Text is not None:
+                    self.Status_Text.emit("#7a1c15", f"[ERROR] : {error}")
+                    self.Exception = True
 
         except VideoUnavailable:
-            self.Update_Gif.emit(
-                ".\\designs\\bkp_ui\\../../imgs/error_gif.gif"
-            )
-            self.Status_Text.emit(
-                "#7a1c15", "[ERROR] : NOT POSSIBLE TO DOWNLOAD  !  THE VIDEO PROBABLY IS NOT PUBLIC OR HAS AGE RESTRICTIONS OR IS UNAVAILABLE / BLOCKED BY REGION."
-            )
+            if self.Update_Gif is not None:
+                self.Update_Gif.emit(
+                    ".\\designs\\bkp_ui\\../../imgs/error_gif.gif"
+                )
+
+            if self.Status_Text is not None:
+                self.Status_Text.emit(
+                    "#7a1c15", "[ERROR] : NOT POSSIBLE TO DOWNLOAD  !  THE VIDEO PROBABLY IS NOT PUBLIC OR HAS AGE RESTRICTIONS OR IS UNAVAILABLE / BLOCKED BY REGION."
+                )
+
             self.Exception = True
 
-        self.Media_Home_Btns.emit()
+        if self.Media_Home_Btns is not None:
+            self.Media_Home_Btns.emit()
 
         if not self.Exception:
             startfile(self.path)
@@ -100,7 +113,7 @@ class DownloadFP_Thread(QThread):
 
     def run(self):
         # optimal download when stream is none
-        for videos in self.youtube_video.videos:
+        for videos in self.youtube_video.videos:  # type: ignore
             try:
                 self.ShowVideoTitle.emit(
                     f'PLAYLIST : {self.youtube_video.title} - ({self.QuantityVideos} VIDEOS)'
@@ -203,7 +216,7 @@ class DownloadIP_Thread(QThread):
                     f"#2c2c2c",
                     f"DOWNLOADING INTERVAL VIDEO {self.VideoCount} of {self.End} FROM PLAYLIST ..."
                 )
-                self.Current_URL = YouTube(
+                self.Current_URL: YouTube | None = YouTube(
                     self.List_Interval_URLS[self.URL_Counter]
                 )
 
@@ -211,27 +224,30 @@ class DownloadIP_Thread(QThread):
                 if not self.Current_URL.streams.filter(res=self.resolution_download, progressive=True, file_extension='mp4'):
                     self.Current_URL.streams.filter(
                         progressive=True, file_extension='mp4'
-                    ).order_by('resolution').desc().first().download(
+                    ).order_by('resolution').desc().\
+                        first().download(  # type:ignore
                         f'{self.path}', timeout=15, skip_existing=True, max_retries=1
                     )
                 else:
                     self.Current_URL.streams.filter(
                         progressive=True, file_extension='mp4',
-                        res=self.resolution_download).first().download(
+                        res=self.resolution_download).first().\
+                        download(  # type:ignore
                         f'{self.path}', timeout=15, skip_existing=True, max_retries=1
                     )  # download based on resolution choiced
 
                 self.URL_Counter += 1
+
                 self.Current_URL.register_on_complete_callback(
                     self.Update_Gif.emit(
                         ".\\designs\\bkp_ui\\../../imgs/sucess_gif.gif"
-                    )
+                    )  # type: ignore
                 )
                 self.VideoCount += 1
                 self.Current_URL.register_on_complete_callback(
                     self.Status_Text.emit(
                         "#1aa839", f"[SUCESS] : VIDEOS {self.Start} to {self.End} of PLAYLIST DOWNLOADED SUCCESFULLY ! "
-                    )
+                    )  # type: ignore
                 )
 
             except (MaxRetriesExceeded, RegexMatchError) as error:
@@ -243,7 +259,9 @@ class DownloadIP_Thread(QThread):
 
             except VideoUnavailable:
                 # get the videos that were skipped
-                self.SkippedVideos.append(self.Current_URL.title)
+                if self.Current_URL is not None:
+                    self.SkippedVideos.append(self.Current_URL.title)
+
                 self.Exception = True
                 continue
 
@@ -257,8 +275,10 @@ class DownloadIP_Thread(QThread):
             self.Status_Text.emit(
                 "#7a1c15", f"[INFO] : THE FOLLOWING VIDEO(S) WERE UNAVAILABLE TO DOWNLOAD : {self.SkippedVideos}"
             )
-            self.Current_URL.register_on_complete_callback(
-                self.Update_Gif.emit(
-                    ".\\designs\\bkp_ui\\../../imgs/sucess_gif.gif"
+
+            if self.Current_URL is not None:
+                self.Current_URL.register_on_complete_callback(
+                    self.Update_Gif.emit(
+                        ".\\designs\\bkp_ui\\../../imgs/sucess_gif.gif"
+                    )  # type: ignore
                 )
-            )
