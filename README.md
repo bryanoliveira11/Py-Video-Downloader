@@ -4,9 +4,9 @@
 
 Você Pode :
 
-- Baixar um Vídeo Único 
-- Baixar uma Playlist Completa
-- Baixar um Intervalo de Videos nas Playlists
+- Baixar um Vídeo Único (single video)
+- Baixar uma Playlist Completa (full playlist)
+- Baixar um Intervalo de Videos nas Playlists (playlist interval)
 
 O Aplicativo Contém :
 
@@ -17,6 +17,10 @@ O Aplicativo Contém :
 
 --------------------------------------------------------------------------------------------------------------- <br/>
 
-DEMO IMAGES : <br/> <br/>![main](https://user-images.githubusercontent.com/80005824/223220578-015b7f99-aca9-4ab7-a325-e603b9a3fbb4.png) <br/>
-![opt](https://user-images.githubusercontent.com/80005824/223220613-61edb45f-7173-4b6f-8ebb-2f8a876fae4c.png) <br/>
-![download](https://user-images.githubusercontent.com/80005824/223220650-5b797b77-969f-4585-95c9-2fce7ac33c8e.png)
+Demonstração : </br>
+
+
+
+
+https://github.com/bryanoliveira11/Py-Video-Downloader/assets/80005824/0227d162-5f7d-48f0-89cd-8575bb945d0b
+
